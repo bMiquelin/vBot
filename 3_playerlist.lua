@@ -151,19 +151,21 @@ function refreshStatus()
   for _, spec in ipairs(getSpectators()) do
     if spec:isPlayer() and not spec:isLocalPlayer() then
       if storage[listPanelName].outfits then
-        specOutfit = spec:getOutfit()
-        if isEnemy(spec:getName()) then
-          specOutfit.head = 112
-          specOutfit.body = 112
-          specOutfit.legs = 112
-          specOutfit.feet = 112
-          spec:setOutfit(specOutfit)
-        elseif isFriend(spec:getName()) then
-          specOutfit.head = 88
-          specOutfit.body = 88
-          specOutfit.legs = 88
-          specOutfit.feet = 88
-          spec:setOutfit(specOutfit)
+        schedule(0, function()
+          specOutfit = spec:getOutfit()
+          if isEnemy(spec:getName()) then
+            specOutfit.head = 112
+            specOutfit.body = 112
+            specOutfit.legs = 112
+            specOutfit.feet = 112
+            spec:setOutfit(specOutfit)
+          elseif isFriend(spec:getName()) then
+            specOutfit.head = 88
+            specOutfit.body = 88
+            specOutfit.legs = 88
+            specOutfit.feet = 88
+            spec:setOutfit(specOutfit)
+          end
         end
       end
     end
